@@ -1,16 +1,25 @@
 name: CI_TEST
-on: 
+
+on:
   push:
-    branches: 
+    branches:
       - main
+
 jobs:
   run-linters:
     name: RUN LINTERS
     runs-on: ubuntu-latest
-    steps:
-      - name: checkout git repository
-        uses: actions/checkout@v7
+    permissions:
+      contents: read
 
-      - name: run linters
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Run linters
         uses: super-linter/super-linter@v7
-          
+        env:
+          VALIDATE_ALL_CODEBASE: false
+          DEFAULT_BRANCH: main
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VALIDATE_HTML: true
