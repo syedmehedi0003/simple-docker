@@ -1,0 +1,16 @@
+name: CI_TEST
+on: 
+  push:
+    branches: 
+      - main
+jobs:
+  run-linters:
+    name: RUN LINTERS
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout git repository
+        uses: actions/checkout@v7
+
+      - name: run linters
+        uses: super-linter/super-linter@v7
+          
